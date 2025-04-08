@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ForestAction - Plantez aujourd'hui, respirez demain</title>
+    <style>
+        :root {
+            --color-dark-green: #2c5e1a;
+            --color-medium-green: #588157;
+            --color-light-green: #a3b18a;
+            --color-earth: #6c584c;
+            --color-sky: #a8dadc;
+            --color-white: #f1faee;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: var(--color-white);
+            line-height: 1.6;
+        }
+        
+        .hero {
+            height: 100vh;
+            width: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/api/placeholder/1600/900') center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin-bottom: 30px;
+        }
+        
+        .cta-btn {
+            display: inline-block;
+            background-color: var(--color-medium-green);
+            color: var(--color-white);
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .cta-btn:hover {
+            background-color: var(--color-dark-green);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            color: var(--color-dark-green);
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .section-title p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            color: #555;
+        }
+        
+        .info-section {
+            background-color: var(--color-white);
+            padding: 80px 0;
+        }
+        
+        .info-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            text-align: center;
+        }
+        
+        .info-content p {
+            font-size: 1.1rem;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .trees-section {
+            background-color: #f9f9f9;
+            padding: 80px 0;
+        }
+        
+        .trees-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .tree-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .tree-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .tree-image {
+            height: 200px;
+            background-position: center;
+            background-size: cover;
+        }
+        
+        .paulownia {
+            background-image: url('/api/placeholder/400/200');
+        }
+        
+        .sequoia {
+            background-image: url('/api/placeholder/400/200');
+        }
+        
+        .eucalyptus {
+            background-image: url('/api/placeholder/400/200');
+        }
+        
+        .tree-content {
+            padding: 20px;
+            color: #333;
+        }
+        
+        .tree-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--color-dark-green);
+        }
+        
+        .tree-content p {
+            margin-bottom: 15px;
+        }
+        
+        .co2-badge {
+            display: inline-block;
+            background-color: var(--color-light-green);
+            color: var(--color-white);
+            padding: 5px 10px;
+            border-radius: 50px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        
+        .plans-section {
+            padding: 80px 0;
+            background-color: var(--color-white);
+        }
+        
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .plan-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            padding: 30px;
+            transition: transform 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .plan-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--color-medium-green);
+        }
+        
+        .plan-price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--color-dark-green);
+            margin-bottom: 20px;
+        }
+        
+        .plan-title {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .plan-features {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        
+        .plan-features li {
+            margin-bottom: 10px;
+            color: #555;
+        }
+        
+        .payment-section {
+            background-color: #f9f9f9;
+            padding: 80px 0;
+        }
+        
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: bold;
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .testimonials-section {
+            padding: 80px 0;
+            background-color: var(--color-white);
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .testimonial-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .testimonial-content {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-author {
+            font-weight: bold;
+            color: var(--color-dark-green);
+        }
+        
+        .faq-section {
+            padding: 80px 0;
+            background-color: #f9f9f9;
+        }
+        
+        .faq-item {
+            margin-bottom: 20px;
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .faq-question {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--color-dark-green);
+            margin-bottom: 10px;
+        }
+        
+        .faq-answer {
+            color: #555;
+        }
+        
+        footer {
+            background-color: var(--color-dark-green);
+            color: var(--color-white);
+            padding: 50px 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: var(--color-white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--color-light-green);
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            color: var(--color-white);
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            color: var(--color-light-green);
+        }
+        
+        .copyright {
+            margin-top: 30px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Plantez aujourd'hui, respirez demain</h1>
+        <p>Rejoignez notre mission pour un avenir plus vert. Chaque arbre planté est un pas vers un monde plus sain pour les générations futures.</p>
+        <a href="#plans" class="cta-btn">Plantez maintenant</a>
+    </section>
+    
+    <!-- Info Section -->
+    <section class="info-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Pourquoi planter des arbres ?</h2>
+                <p>Une action simple aux impacts considérables</p>
+            </div>
+            <div class="info-content">
+                <p>Les arbres sont nos alliés les plus précieux dans la lutte contre le changement climatique. En absorbant le CO2 de l'atmosphère, ils contribuent directement à réduire l'effet de serre. Un seul arbre adulte peut absorber jusqu'à 22 kg de CO2 par an, soit l'équivalent des émissions produites par une voiture sur 80 km.</p>
+                <p>En plus de leur capacité exceptionnelle à stocker le carbone, les arbres préservent la biodiversité, stabilisent les sols, purifient l'air et l'eau, et contribuent à la régulation du climat local. Chaque arbre planté est un investissement pour notre avenir commun.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Trees Section -->
+    <section class="trees-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nos champions de l'absorption de CO2</h2>
+                <p>Découvrez les trois espèces d'arbres que nous plantons pour maximiser l'impact sur la réduction du CO2</p>
+            </div>
+            <div class="trees-grid">
+                <div class="tree-card">
+                    <div class="tree-image paulownia"></div>
+                    <div class="tree-content">
+                        <h3>Paulownia</h3>
+                        <p>Surnommé "l'arbre miracle", le Paulownia est l'un des arbres à la croissance la plus rapide au monde, pouvant atteindre 5 mètres en seulement 3 ans. Sa capacité d'absorption de CO2 est phénoménale, jusqu'à 10 fois supérieure à celle d'autres espèces.</p>
+                        <p>Ses larges feuilles en forme de cœur agissent comme de véritables filtres à carbone, tandis que son système racinaire profond stabilise les sols érodés.</p>
+                        <span class="co2-badge">Absorption : jusqu'à 103 kg de CO2/an</span>
+                    </div>
+                </div>
+                
+                <div class="tree-card">
+                    <div class="tree-image sequoia"></div>
+                    <div class="tree-content">
+                        <h3>Séquoia géant</h3>
+                        <p>Le majestueux Séquoia est l'un des plus grands êtres vivants sur Terre, pouvant atteindre plus de 100 mètres de hauteur. Sa longévité exceptionnelle (jusqu'à 3000 ans) en fait un puits de carbone à très long terme.</p>
+                        <p>Chaque Séquoia planté aujourd'hui continuera à séquestrer du carbone pour les siècles à venir, créant un héritage écologique durable pour les générations futures.</p>
+                        <span class="co2-badge">Absorption : jusqu'à 93 kg de CO2/an</span>
+                    </div>
+                </div>
+                
+                <div class="tree-card">
+                    <div class="tree-image eucalyptus"></div>
+                    <div class="tree-content">
+                        <h3>Eucalyptus</h3>
+                        <p>Originaire d'Australie, l'Eucalyptus combine une croissance rapide avec une remarquable efficacité d'absorption de CO2. Adaptable à différents climats, il prospère même dans des conditions difficiles.</p>
+                        <p>En plus de sa capacité à séquestrer le carbone, l'Eucalyptus offre un habitat précieux pour de nombreuses espèces et contribue à la régénération des sols appauvris.</p>
+                        <span class="co2-badge">Absorption : jusqu'à 70 kg de CO2/an</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Plans Section -->
+    <section class="plans-section" id="plans">
+        <div class="container">
+            <div class="section-title">
+                <h2>Choisissez votre impact</h2>
+                <p>Quel que soit votre budget, vous pouvez contribuer à un changement positif</p>
+            </div>
+            <div class="plans-grid">
+                <div class="plan-card">
+                    <div class="plan-price">10€</div>
+                    <h3 class="plan-title">Débutant écolo</h3>
+                    <ul class="plan-features">
+                        <li>1 arbre planté</li>
+                        <li>Jusqu'à 103 kg de CO2 absorbé</li>
+                        <li>Certificat numérique</li>
+                        <li>Mises à jour trimestrielles</li>
+                    </ul>
+                    <a href="#payment" class="cta-btn">Choisir ce plan</a>
+                </div>
+                
+                <div class="plan-card">
+                    <div class="plan-price">25€</div>
+                    <h3 class="plan-title">Engagé pour la planète</h3>
+                    <ul class="plan-features">
+                        <li>3 arbres plantés</li>
+                        <li>Jusqu'à 309 kg de CO2 absorbé</li>
+                        <li>Certificat numérique personnalisé</li>
+                        <li>Mises à jour bimensuelles</li>
+                        <li>Badge exclusif sur notre site</li>
+                    </ul>
+                    <a href="#payment" class="cta-btn">Choisir ce plan</a>
+                </div>
+                
+                <div class="plan-card">
+                    <div class="plan-price">50€</div>
+                    <h3 class="plan-title">Champion de la reforestation</h3>
+                    <ul class="plan-features">
+                        <li>7 arbres plantés</li>
+                        <li>Jusqu'à 721 kg de CO2 absorbé</li>
+                        <li>Certificat personnalisé imprimé</li>
+                        <li>Mises à jour mensuelles avec photos</li>
+                        <li>Invitation à notre événement annuel</li>
+                        <li>Accès à notre communauté privée</li>
+                    </ul>
+                    <a href="#payment" class="cta-btn">Choisir ce plan</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Payment Section -->
+    <section class="payment-section" id="payment">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contribuez dès maintenant</h2>
+                <p>Processus sécurisé et transparent</p>
+            </div>
+            <div class="form-container">
+                <form id="payment-form">
+                    <div class="form-group">
+                        <label for="plan">Sélectionnez votre plan</label>
+                        <select id="plan" name="plan">
+                            <option value="starter">Débutant écolo - 10€</option>
+                            <option value="engaged">Engagé pour la planète - 25€</option>
+                            <option value="champion">Champion de la reforestation - 50€</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Nom complet</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="card">Numéro de carte</label>
+                        <input type="text" id="card" name="card" placeholder="1234 5678 9012 3456" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="expiry">Date d'expiration</label>
+                        <input type="text" id="expiry" name="expiry" placeholder="MM/AA" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cvc">CVC</label>
+                        <input type="text" id="cvc" name="cvc" placeholder="123" required>
+                    </div>
+                    <button type="submit" class="cta-btn">Confirmer le paiement</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Ce qu'en disent nos contributeurs</h2>
+                <p>Rejoignez une communauté engagée pour le changement</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-content">"J'ai offert la plantation d'arbres à mes proches pour Noël. Non seulement ils ont adoré l'idée, mais nous recevons des mises à jour régulières sur la croissance de nos arbres. Un cadeau qui continue de donner !"</p>
+                    <p class="testimonial-author">Marie D., Paris</p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-content">"En tant qu'entreprise, nous cherchions un moyen concret de compenser notre empreinte carbone. Ce programme nous a permis d'impliquer nos employés et de visualiser notre impact positif."</p>
+                    <p class="testimonial-author">Thomas L., Directeur RSE</p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-content">"J'ai commencé avec le plan de base il y a un an, et je suis tellement satisfait que j'ai mis en place un don mensuel. La transparence du projet et les communications régulières me donnent confiance."</p>
+                    <p class="testimonial-author">Sarah M., Lyon</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Questions fréquentes</h2>
+                <p>Tout ce que vous devez savoir sur notre programme de reforestation</p>
+            </div>
+            <div class="faq-content">
+                <div class="faq-item">
+                    <p class="faq-question">Où sont plantés les arbres ?</p>
+                    <p class="faq-answer">Nos projets de reforestation sont situés dans plusieurs régions stratégiques : la forêt amazonienne, les zones déboisées d'Europe et certaines régions d'Afrique. Nous sélectionnons les sites en fonction des besoins écologiques et de l'impact potentiel.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <p class="faq-question">Comment puis-je suivre l'évolution de mes arbres ?</p>
+                    <p class="faq-answer">Selon votre niveau de contribution, vous recevrez des mises à jour régulières par email avec des photos et des informations sur l'avancement des plantations. Nous utilisons également des technologies de géolocalisation pour vous montrer précisément où vos arbres ont été plantés.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <p class="faq-question">Quelle est la garantie que mes arbres survivront ?</p>
+                    <p class="faq-answer">Nous travaillons avec des experts locaux pour assurer un taux de survie optimal. Si un arbre ne survit pas pendant la première année, nous nous engageons à le remplacer sans frais supplémentaires.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <p class="faq-question">Mes dons sont-ils déductibles des impôts ?</p>
+                    <p class="faq-answer">Oui, notre organisation est reconnue d'utilité publique, ce qui rend vos dons éligibles à une déduction fiscale selon la législation en vigueur dans votre pays. Vous recevrez automatiquement un reçu fiscal en début d'année.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <p class="faq-question">Comment puis-je impliquer mon entreprise ?</p>
+                    <p class="faq-answer">Nous proposons des programmes spécifiques pour les entreprises, avec des solutions personnalisées selon votre taille et vos objectifs RSE. Contactez notre équipe dédiée aux partenariats pour en savoir plus.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>ForestAction</h3>
+                <p>Notre mission est de reboiser la planète, un arbre à la fois. Rejoignez-nous dans cette aventure pour un avenir plus vert et plus durable.</p>
+                <div class="social-icons">
+                    <a href="#">F</a>
+                    <a href="#">T</a>
+                    <a href="#">I</a>
+                    <a href="#">L</a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Liens utiles</h3>
+                <ul>
+                    <li><a href="#">À propos de nous</a></li>
+                    <li><a href="#">Nos projets</a></li>
+                    <li><a href="#">Impact environnemental</a></li>
+                    <li><a href="#">Devenir partenaire</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Nous contacter</h3>
+                <ul>
+                    <li>Email: contact@forestaction.org</li>
+                    <li>Téléphone: +33 1 23 45 67 89</li>
+                    <li>Adresse: 123 Rue de la Nature, Paris</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 ForestAction. Tous droits réservés.</p>
+        </div>
+    </footer>
+</body>
+</html>
